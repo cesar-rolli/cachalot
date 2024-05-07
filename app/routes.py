@@ -1,11 +1,12 @@
-from app import app
-from flask import jsonify
-from flask import request
-import jsonpickle
+from flask import Flask, request
 
-@app.route('/', methods=["GET"])
+app = Flask(__name__)
 
+@app.route('/')
 def index():
-  ip_addr = request.remote_addr                  # IP do usuario
-  navegador = request.headers.get('User-Agent')  # plataforma, navegador, versão, língua, 
-  return navegador + '---------' + ip_addr
+    # Obtendo o endereço IP do cliente
+    client_ip = request.remote_addr
+    return f'O seu endereço IP é: {client_ip}'
+
+if __name__ == '__main__':
+    app.run()
